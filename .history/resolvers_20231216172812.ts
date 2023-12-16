@@ -40,10 +40,8 @@ export const resolvers = {
       const {id} = args;
       const record = await Article.updateOne({_id: id, deleted: false}, {
         deleted: true,
-        deleteAt: new Date()
+        
       })
-
-      return "Đã xóa thành công!"
     }
 
   }

@@ -42,8 +42,6 @@ export const resolvers = {
         deleted: true,
         deleteAt: new Date()
       })
-
-      return "Đã xóa thành công!"
     }
 
   }

@@ -22,6 +22,7 @@ exports.typeDefs = apollo_server_express_1.gql `
   }
 
   type Mutation {
-    createArticle(article: ArticleInput): Article
+    createArticle(article: ArticleInput): Article,
+    editArticle(id: ID, article: ArticleInput): Article
   }
 `;
