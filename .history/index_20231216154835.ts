@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import * as database from "./config/database";
 import { ApolloServer } from "apollo-server-express";
 import { typeDefs } from "./typeDefs";
-import { resolvers } from "./resolvers";
 
 const StartServer = async () => {
   dotenv.config();
@@ -15,9 +14,17 @@ const StartServer = async () => {
 
   //Graphql
 
+  const resolvers = {
+    Query: {
+      hello: () => {
+        return "Hello world";
+      },
+    },
+  };
+
   const apolloServer = new ApolloServer({
     typeDefs: typeDefs,
-    resolvers: resolvers,
+    resolvers,
   });
 
   await apolloServer.start();

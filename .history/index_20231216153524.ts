@@ -1,9 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import * as database from "./config/database";
-import { ApolloServer } from "apollo-server-express";
-import { typeDefs } from "./typeDefs";
-import { resolvers } from "./resolvers";
+import { ApolloServer, gql } from "apollo-server-express";
 
 const StartServer = async () => {
   dotenv.config();
@@ -14,10 +12,23 @@ const StartServer = async () => {
   const port: number | string = process.env.PORT || 3000;
 
   //Graphql
+  const typeDefs = gql`
+    type Query {
+      hello: String
+    }
+  `;
+
+  const resolvers = {
+    Query: {
+      hello: () => {
+        return "Hello world";
+      },
+    },
+  };
 
   const apolloServer = new ApolloServer({
-    typeDefs: typeDefs,
-    resolvers: resolvers,
+    typeDefs,
+    resolvers,
   });
 
   await apolloServer.start();
@@ -32,4 +43,4 @@ const StartServer = async () => {
   });
 };
 
-StartServer();
+Ser
