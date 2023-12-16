@@ -18,17 +18,7 @@ export const resolvers = {
         _id: id,
         deleted: false,
       });
-      return article;
+      return article
     },
   },
-
-  Mutation: {
-    createArticle: async (_,args) => {
-      const {article} = args;
-
-      const record = new Article(article);
-      await record.save();
-      return record;
-    }
-  }
 };

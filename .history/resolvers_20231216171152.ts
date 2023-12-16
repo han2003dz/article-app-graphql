@@ -28,7 +28,7 @@ export const resolvers = {
 
       const record = new Article(article);
       await record.save();
-      return record;
+      return recor;d
     }
   }
 };

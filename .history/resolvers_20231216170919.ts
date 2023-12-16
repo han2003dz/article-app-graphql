@@ -23,12 +23,10 @@ export const resolvers = {
   },
 
   Mutation: {
-    createArticle: async (_,args) => {
+    createArticle: (_,args) => {
       const {article} = args;
 
-      const record = new Article(article);
-      await record.save();
-      return record;
+      const record = new Article(a)
     }
   }
 };
