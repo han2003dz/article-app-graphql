@@ -76,6 +76,41 @@ exports.resolversUser = {
                             }];
                 }
             });
+        }); },
+        loginUser: function (_, args) { return __awaiter(void 0, void 0, void 0, function () {
+            var _a, email, password, infoUser;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _a = args.user, email = _a.email, password = _a.password;
+                        return [4 /*yield*/, user_model_1["default"].findOne({
+                                email: email,
+                                deleted: false
+                            })];
+                    case 1:
+                        infoUser = _b.sent();
+                        if (!infoUser) {
+                            return [2 /*return*/, {
+                                    code: 400,
+                                    message: "Email không tồn tại!"
+                                }];
+                        }
+                        if (md5_1["default"](password) !== infoUser.password) {
+                            return [2 /*return*/, {
+                                    code: 400,
+                                    message: "Sai mật khẩu!"
+                                }];
+                        }
+                        return [2 /*return*/, {
+                                code: 200,
+                                message: "Thành công!",
+                                id: infoUser.id,
+                                fullName: infoUser.fullName,
+                                email: infoUser.email,
+                                token: infoUser.token
+                            }];
+                }
+            });
         }); }
     }
 };
