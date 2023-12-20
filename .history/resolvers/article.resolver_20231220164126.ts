@@ -7,6 +7,7 @@ export const resolversArticle = {
       const { sortKey, sortValue } = args;
       // Sort
       const sort = {};
+
       if(sortKey && sortValue) {
         sort[sortKey] = sortValue;
       }
@@ -14,7 +15,8 @@ export const resolversArticle = {
 
       const articles = await Article.find({
         deleted: false
-      }).sort(sort);
+      });
+
       return articles;
     },
     getArticle: async (_, args) => {

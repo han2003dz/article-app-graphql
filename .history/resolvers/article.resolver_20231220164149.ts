@@ -14,7 +14,7 @@ export const resolversArticle = {
 
       const articles = await Article.find({
         deleted: false
-      }).sort(sort);
+      }).sort(sort );
       return articles;
     },
     getArticle: async (_, args) => {
