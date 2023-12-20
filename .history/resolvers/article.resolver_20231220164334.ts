@@ -17,14 +17,9 @@ export const resolversArticle = {
       }
       // End Sort
 
-      // Pagination
-      const skip = (currentPage - 1) * limitItems;
-      // End Pagination
-
       const articles = await Article.find({
         deleted: false
-      }).sort(sort).limit(limitItems).skip(skip);
-      
+      }).sort(sort);
       return articles;
     },
     getArticle: async (_, args) => {

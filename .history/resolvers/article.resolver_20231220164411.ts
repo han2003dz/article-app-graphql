@@ -24,7 +24,6 @@ export const resolversArticle = {
       const articles = await Article.find({
         deleted: false
       }).sort(sort).limit(limitItems).skip(skip);
-      
       return articles;
     },
     getArticle: async (_, args) => {

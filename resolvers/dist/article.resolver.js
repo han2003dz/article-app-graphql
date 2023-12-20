@@ -42,18 +42,19 @@ var category_model_1 = require("../models/category.model");
 exports.resolversArticle = {
     Query: {
         getListArticle: function (_, args) { return __awaiter(void 0, void 0, void 0, function () {
-            var sortKey, sortValue, sort, articles;
+            var sortKey, sortValue, currentPage, limitItems, sort, skip, articles;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        sortKey = args.sortKey, sortValue = args.sortValue;
+                        sortKey = args.sortKey, sortValue = args.sortValue, currentPage = args.currentPage, limitItems = args.limitItems;
                         sort = {};
                         if (sortKey && sortValue) {
                             sort[sortKey] = sortValue;
                         }
+                        skip = (currentPage - 1) * limitItems;
                         return [4 /*yield*/, article_model_1["default"].find({
                                 deleted: false
-                            }).sort(sort)];
+                            }).sort(sort).limit(limitItems).skip(skip)];
                     case 1:
                         articles = _a.sent();
                         return [2 /*return*/, articles];
