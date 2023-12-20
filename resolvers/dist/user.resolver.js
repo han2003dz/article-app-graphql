@@ -42,14 +42,14 @@ var user_model_1 = require("../models/user.model");
 var md5_1 = require("md5");
 exports.resolversUser = {
     Query: {
-        getUser: function (_, args) { return __awaiter(void 0, void 0, void 0, function () {
-            var id, infoUser;
+        getUser: function (_, args, context) { return __awaiter(void 0, void 0, void 0, function () {
+            var infoUser;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        id = args.id;
+                        if (!context["user"]) return [3 /*break*/, 2];
                         return [4 /*yield*/, user_model_1["default"].findOne({
-                                _id: id,
+                                token: context["user"].token,
                                 deleted: false
                             })];
                     case 1:
@@ -70,7 +70,12 @@ exports.resolversUser = {
                                     message: "Thất bại!"
                                 }];
                         }
-                        return [2 /*return*/];
+                        return [3 /*break*/, 3];
+                    case 2: return [2 /*return*/, {
+                            code: 403,
+                            message: "Không có quyền truy cập!"
+                        }];
+                    case 3: return [2 /*return*/];
                 }
             });
         }); }

@@ -28,8 +28,8 @@ export const resolversUser = {
         }
       } else {
         return {
-          code: 403,
-          message: "Không có quyền truy cập!",
+          code: 400,
+          message: "Thất bại!",
         };
       }
     },

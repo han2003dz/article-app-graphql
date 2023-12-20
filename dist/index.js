@@ -37,14 +37,17 @@ const database = __importStar(require("./config/database"));
 const apollo_server_express_1 = require("apollo-server-express");
 const index_typeDes_1 = require("./typeDefs/index.typeDes");
 const index_resolver_1 = require("./resolvers/index.resolver");
+const auth_middleware_1 = require("./middlewares/auth.middleware");
 const StartServer = () => __awaiter(void 0, void 0, void 0, function* () {
     dotenv_1.default.config();
     database.connect();
     const app = express_1.default();
     const port = process.env.PORT || 3000;
+    app.use("/graphql", auth_middleware_1.requireAuth);
     const apolloServer = new apollo_server_express_1.ApolloServer({
         typeDefs: index_typeDes_1.typeDefs,
         resolvers: index_resolver_1.resolvers,
+        context: ({ req }) => req,
     });
     yield apolloServer.start();
     apolloServer.applyMiddleware({
