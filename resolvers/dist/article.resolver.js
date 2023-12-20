@@ -42,19 +42,34 @@ var category_model_1 = require("../models/category.model");
 exports.resolversArticle = {
     Query: {
         getListArticle: function (_, args) { return __awaiter(void 0, void 0, void 0, function () {
-            var sortKey, sortValue, currentPage, limitItems, sort, skip, articles;
+            var sortKey, sortValue, currentPage, limitItems, filterKey, filterValue, keyword, find, sort, skip, keywordRegex, articles;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        sortKey = args.sortKey, sortValue = args.sortValue, currentPage = args.currentPage, limitItems = args.limitItems;
+                        sortKey = args.sortKey, sortValue = args.sortValue, currentPage = args.currentPage, limitItems = args.limitItems, filterKey = args.filterKey, filterValue = args.filterValue, keyword = args.keyword;
+                        find = {
+                            deleted: false
+                        };
                         sort = {};
                         if (sortKey && sortValue) {
                             sort[sortKey] = sortValue;
                         }
                         skip = (currentPage - 1) * limitItems;
-                        return [4 /*yield*/, article_model_1["default"].find({
-                                deleted: false
-                            }).sort(sort).limit(limitItems).skip(skip)];
+                        // End Pagination
+                        // Filter
+                        if (filterKey && filterValue) {
+                            find[filterKey] = filterValue;
+                        }
+                        // End Filter
+                        // Search
+                        if (keyword) {
+                            keywordRegex = new RegExp(keyword, "i");
+                            find["title"] = keywordRegex;
+                        }
+                        return [4 /*yield*/, article_model_1["default"].find(find)
+                                .sort(sort)
+                                .limit(limitItems)
+                                .skip(skip)];
                     case 1:
                         articles = _a.sent();
                         return [2 /*return*/, articles];
