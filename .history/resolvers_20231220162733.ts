@@ -39,6 +39,8 @@ export const resolvers = {
     },
   },
 
+  
+
   Mutation: {
     createArticle: async (_,args) => {
       const {article} = args;

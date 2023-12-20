@@ -5,6 +5,8 @@ const articleSchema = new mongoose.Schema(
     title: String,
     avatar: String,
     description: String,
+    articleId: String,
+    
     deleted: {
       type: Boolean,
       default: false,
