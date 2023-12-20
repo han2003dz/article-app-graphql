@@ -8,6 +8,7 @@ exports.typeDefs = apollo_server_express_1.gql `
     title: String
     avatar: String
     description: String
+    category: Category
   }
   type Category {
     id: ID

@@ -49,6 +49,16 @@ exports.resolvers = {
             return category;
         }),
     },
+    Article: {
+        category: (article) => __awaiter(void 0, void 0, void 0, function* () {
+            const categoryId = article.categoryId;
+            const category = yield category_model_1.default.findOne({
+                _id: categoryId,
+                deleted: false
+            });
+            return category;
+        })
+    },
     Mutation: {
         createArticle: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
             const { article } = args;
